@@ -1,7 +1,10 @@
 
 ## Social network Spring REST API (Java 17)
 
-[![Java CI with Maven](https://github.com/Luuk2016/socialnetwork-spring-api/actions/workflows/maven.yml/badge.svg?branch=master)](https://github.com/Luuk2016/socialnetwork-spring-api/actions/workflows/maven.yml)
+### Build status
+|Master|Develop|
+|------|-------|
+|[![Java CI with Maven](https://github.com/Luuk2016/socialnetwork-spring-api/actions/workflows/maven.yml/badge.svg?branch=master)](https://github.com/Luuk2016/socialnetwork-spring-api/actions/workflows/maven.yml)|[![Java CI with Maven](https://github.com/Luuk2016/socialnetwork-spring-api/actions/workflows/maven.yml/badge.svg?branch=develop)](https://github.com/Luuk2016/socialnetwork-spring-api/actions/workflows/maven.yml)|
 
 ### Prerequisites
 * JDK 17
