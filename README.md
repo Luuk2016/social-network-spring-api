@@ -10,8 +10,8 @@
 * JDK 17
 
 ### Links
-- [Swagger documentation](http://localhost:8080/swagger-ui.html)
-- [H2 console](http://localhost:8080/h2-console)
+- [Swagger documentation](http://localhost:8080/api/swagger-ui.html)
+- [H2 console](http://localhost:8080/api/h2-console)
 
 ### License
 This application is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).

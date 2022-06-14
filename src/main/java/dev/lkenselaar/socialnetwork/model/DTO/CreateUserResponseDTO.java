@@ -1,23 +1,22 @@
 package dev.lkenselaar.socialnetwork.model.DTO;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import org.springframework.validation.annotation.Validated;
 
-import javax.validation.constraints.NotBlank;
-
 /**
  * @author Luuk Kenselaar (https://lkenselaar.dev)
- * @since 11-6-2022
+ * @since 14-6-2022
  */
 @Validated
 @Data
-public class AuthenticateRequestDTO {
-    @Schema(example = "john", required = true)
-    @NotBlank(message = "Username can't be blank")
-    private String username;
+public class CreateUserResponseDTO {
+    @JsonProperty("name")
+    @Schema(example = "John Doe", required = true)
+    private String name;
 
-    @Schema(example = "password", required = true)
-    @NotBlank(message = "Password can't be blank")
-    private String password;
+    @JsonProperty("username")
+    @Schema(example = "john", required = true)
+    private String username;
 }
