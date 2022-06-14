@@ -1,10 +1,8 @@
 package dev.lkenselaar.socialnetwork.model.DTO;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.*;
 import org.springframework.validation.annotation.Validated;
 
 /**
@@ -12,11 +10,9 @@ import org.springframework.validation.annotation.Validated;
  * @since 13-6-2022
  */
 @Validated
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
+@Data
 public class AuthenticateResponseDTO {
     @JsonProperty("accessToken")
+    @Schema(example = "d290f1ee-6c54-4b01-90e6-d701748f0851", required = true)
     private String accessToken;
 }

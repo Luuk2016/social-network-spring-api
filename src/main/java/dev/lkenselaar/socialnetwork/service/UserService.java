@@ -38,7 +38,7 @@ public class UserService {
             User user = userRepository.findByUsername(username);
             return jwtTokenProvider.createToken(username, user.getRoles());
         } catch (AuthenticationException exception) {
-            throw new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY, "Username/password invalid");
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Username/password invalid");
         }
     }
 
