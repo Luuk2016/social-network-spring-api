@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>dev.lkenselaar</groupId>
-	<artifactId>socialnetwork</artifactId>
+	<artifactId>social-network</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>social network</name>
 	<description>Demo project for Spring Boot</description>
