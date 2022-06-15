@@ -1,7 +1,7 @@
-package dev.lkenselaar.socialnetwork.security;
+package dev.lkenselaar.social.network.security;
 
-import dev.lkenselaar.socialnetwork.model.User;
-import dev.lkenselaar.socialnetwork.repo.UserRepository;
+import dev.lkenselaar.social.network.model.User;
+import dev.lkenselaar.social.network.repo.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

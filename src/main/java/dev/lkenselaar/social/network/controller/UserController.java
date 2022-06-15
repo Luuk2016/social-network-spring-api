@@ -1,12 +1,9 @@
-package dev.lkenselaar.socialnetwork.controller;
+package dev.lkenselaar.social.network.controller;
 
-import dev.lkenselaar.socialnetwork.model.DTO.AuthenticateRequestDTO;
-import dev.lkenselaar.socialnetwork.model.DTO.AuthenticateResponseDTO;
-import dev.lkenselaar.socialnetwork.model.DTO.CreateUserRequestDTO;
-import dev.lkenselaar.socialnetwork.model.DTO.CreateUserResponseDTO;
-import dev.lkenselaar.socialnetwork.model.Role;
-import dev.lkenselaar.socialnetwork.model.User;
-import dev.lkenselaar.socialnetwork.service.UserService;
+import dev.lkenselaar.social.network.model.DTO.*;
+import dev.lkenselaar.social.network.service.UserService;
+import dev.lkenselaar.social.network.model.Role;
+import dev.lkenselaar.social.network.model.User;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -56,7 +53,7 @@ public class UserController {
             user.setPassword(body.getPassword());
             user.setRoles(List.of(Role.ROLE_USER));
 
-            User result = userService.save(user);
+            User result = userService.add(user);
 
             CreateUserResponseDTO response = new CreateUserResponseDTO();
             response.setName(result.getName());

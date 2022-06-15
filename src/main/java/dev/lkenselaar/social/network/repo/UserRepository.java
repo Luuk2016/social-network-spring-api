@@ -1,6 +1,6 @@
-package dev.lkenselaar.socialnetwork.repo;
+package dev.lkenselaar.social.network.repo;
 
-import dev.lkenselaar.socialnetwork.model.User;
+import dev.lkenselaar.social.network.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

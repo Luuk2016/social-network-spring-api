@@ -1,9 +1,8 @@
-package dev.lkenselaar.socialnetwork.service;
+package dev.lkenselaar.social.network.service;
 
-import dev.lkenselaar.socialnetwork.model.User;
-import dev.lkenselaar.socialnetwork.repo.UserRepository;
-import dev.lkenselaar.socialnetwork.security.JwtTokenProvider;
-import lombok.AllArgsConstructor;
+import dev.lkenselaar.social.network.security.JwtTokenProvider;
+import dev.lkenselaar.social.network.model.User;
+import dev.lkenselaar.social.network.repo.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -60,7 +59,7 @@ public class UserService {
         throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found");
     }
 
-    public User save(User user) {
+    public User add(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userRepository.save(user);
     }

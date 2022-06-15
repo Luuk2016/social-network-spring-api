@@ -1,4 +1,4 @@
-package dev.lkenselaar.socialnetwork.model;
+package dev.lkenselaar.social.network.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;

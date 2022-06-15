@@ -1,8 +1,8 @@
-package dev.lkenselaar.socialnetwork.configuration;
+package dev.lkenselaar.social.network.configuration;
 
-import dev.lkenselaar.socialnetwork.model.Role;
-import dev.lkenselaar.socialnetwork.model.User;
-import dev.lkenselaar.socialnetwork.service.UserService;
+import dev.lkenselaar.social.network.model.Role;
+import dev.lkenselaar.social.network.model.User;
+import dev.lkenselaar.social.network.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -22,7 +22,7 @@ public class AppStartupRunner implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        userService.save(new User(null, "John Doe", "john", "password", List.of(Role.ROLE_USER)));
-        userService.save(new User(null, "Jane Roe", "jane", "password", List.of(Role.ROLE_USER, Role.ROLE_ADMIN)));
+        userService.add(new User(null, "John Doe", "john", "password", List.of(Role.ROLE_USER)));
+        userService.add(new User(null, "Jane Roe", "jane", "password", List.of(Role.ROLE_USER, Role.ROLE_ADMIN)));
     }
 }
