@@ -26,6 +26,7 @@ public class User {
 
     @JsonProperty("username")
     @NotBlank(message = "Username can't be blank")
+    @Column(unique = true)
     private String username;
 
     @JsonProperty("password")
