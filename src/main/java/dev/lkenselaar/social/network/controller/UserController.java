@@ -33,21 +33,6 @@ public class UserController {
     @Autowired
     private ModelMapper modelMapper;
 
-    @PostMapping("/users/authenticate")
-    @Operation(summary = "Authenticate", description = "Receive a token to authenticate with the API", tags = {"Auth"})
-    public ResponseEntity<?> authenticate(@Valid @RequestBody AuthenticateRequestDTO body) {
-        try {
-            String accessToken = userService.authenticate(body.getUsername(), body.getPassword());
-
-            AuthenticateResponseDTO response = new AuthenticateResponseDTO();
-            response.setAccessToken(accessToken);
-
-            return new ResponseEntity<>(response, HttpStatus.OK);
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(e.getMessage());
-        }
-    }
-
     @PostMapping("/users")
     @Operation(summary = "Create user", description = "Create a new user", tags = {"User"})
     public ResponseEntity<?> createUser(@Valid @RequestBody CreateUserRequestDTO body) {

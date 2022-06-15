@@ -9,19 +9,18 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.startsWith;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 /**
  * @author Luuk Kenselaar (https://lkenselaar.dev)
- * @since 14-6-2022
+ * @since 15/06/2022
  */
 @SpringBootTest
 @AutoConfigureMockMvc
-public class UserControllerTest {
+public class AuthenticationControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
@@ -32,10 +31,10 @@ public class UserControllerTest {
         authenticateRequest.setUsername("john");
         authenticateRequest.setPassword("password");
 
-        mockMvc.perform(post("/users/authenticate")
-                    .content(asJsonString(authenticateRequest))
-                    .contentType(MediaType.APPLICATION_JSON)
-                    .accept(MediaType.APPLICATION_JSON))
+        mockMvc.perform(post("/authenticate")
+                        .content(asJsonString(authenticateRequest))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.accessToken").exists())
@@ -48,7 +47,7 @@ public class UserControllerTest {
         authenticateRequest.setUsername("invalid");
         authenticateRequest.setPassword("invalid");
 
-        mockMvc.perform(post("/users/authenticate")
+        mockMvc.perform(post("/authenticate")
                         .content(asJsonString(authenticateRequest))
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
