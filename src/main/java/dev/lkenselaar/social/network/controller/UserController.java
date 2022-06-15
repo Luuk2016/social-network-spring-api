@@ -4,6 +4,7 @@ import dev.lkenselaar.social.network.model.DTO.*;
 import dev.lkenselaar.social.network.service.UserService;
 import dev.lkenselaar.social.network.model.User;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -53,7 +54,12 @@ public class UserController {
 
     @GetMapping("/users")
     @PreAuthorize("hasAnyRole('ADMIN')")
-    @Operation(summary = "Get users", description = "Get all registered users", tags = {"Admin"})
+    @Operation(
+        summary = "Get users",
+        description = "Get all registered users",
+        security = @SecurityRequirement(name = "bearerAuth"),
+        tags = {"Admin"}
+    )
     public ResponseEntity<?> getUsers() {
         try {
             List<User> users = userService.getUsers();
@@ -69,7 +75,12 @@ public class UserController {
 
     @GetMapping("/users/{id}")
     @PreAuthorize("hasAnyRole('ADMIN')")
-    @Operation(summary = "Get user", description = "Get a specific user by id", tags = {"Admin"})
+    @Operation(
+        summary = "Get user",
+        description = "Get a specific user by id",
+        security = @SecurityRequirement(name = "bearerAuth"),
+        tags = {"Admin"}
+    )
     public ResponseEntity<?> getUser(@PathVariable int id) {
         try {
             User user = userService.getUserById(id);
@@ -85,7 +96,12 @@ public class UserController {
 
     @PutMapping("/users/{id}")
     @PreAuthorize("hasAnyRole('ADMIN')")
-    @Operation(summary = "Update user", description = "Update a specific user", tags = {"Admin"})
+    @Operation(
+        summary = "Update user",
+        description = "Update a specific user",
+        security = @SecurityRequirement(name = "bearerAuth"),
+        tags = {"Admin"}
+    )
     public ResponseEntity<?> updateUser(@PathVariable int id, @Validated @RequestBody UpdateUserRequestDTO body) {
         try {
             // Convert DTO to Entity
@@ -103,7 +119,12 @@ public class UserController {
     }
 
     @DeleteMapping("/users/{id}")
-    @Operation(summary = "Delete user", description = "Delete a specific user", tags = {"Admin"})
+    @Operation(
+        summary = "Delete user",
+        description = "Delete a specific user",
+        security = @SecurityRequirement(name = "bearerAuth"),
+        tags = {"Admin"}
+    )
     public ResponseEntity<?> deleteUser(@PathVariable int id) {
         try {
             userService.deleteUser(id);
