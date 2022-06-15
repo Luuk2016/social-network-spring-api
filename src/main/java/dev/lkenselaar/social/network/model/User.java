@@ -1,4 +1,4 @@
-package dev.lkenselaar.socialnetwork.model;
+package dev.lkenselaar.social.network.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
@@ -26,6 +26,7 @@ public class User {
 
     @JsonProperty("username")
     @NotBlank(message = "Username can't be blank")
+    @Column(unique = true)
     private String username;
 
     @JsonProperty("password")
@@ -33,5 +34,5 @@ public class User {
     private String password;
 
     @ElementCollection(fetch = FetchType.EAGER)
-    private List<Role> roles;
+    private List<Role> roles = List.of(Role.ROLE_USER);
 }

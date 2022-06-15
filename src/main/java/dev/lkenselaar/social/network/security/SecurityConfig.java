@@ -1,6 +1,5 @@
-package dev.lkenselaar.socialnetwork.security;
+package dev.lkenselaar.social.network.security;
 
-import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -34,7 +33,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
         http.authorizeRequests()
-                .antMatchers(HttpMethod.POST, "/users/authenticate").permitAll()
+                .antMatchers(HttpMethod.POST, "/authenticate").permitAll()
                 .antMatchers(HttpMethod.POST, "/users").permitAll()
                 .antMatchers("/swagger-ui/**/**", "/v3/api-docs/**").permitAll()
                 .antMatchers("/swagger-resources/**").permitAll()

@@ -1,6 +1,6 @@
-package dev.lkenselaar.socialnetwork.security;
+package dev.lkenselaar.social.network.security;
 
-import dev.lkenselaar.socialnetwork.model.Role;
+import dev.lkenselaar.social.network.model.Role;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;

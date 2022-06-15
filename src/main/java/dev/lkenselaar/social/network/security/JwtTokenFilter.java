@@ -1,4 +1,4 @@
-package dev.lkenselaar.socialnetwork.security;
+package dev.lkenselaar.social.network.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
