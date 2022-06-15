@@ -33,5 +33,5 @@ public class User {
     private String password;
 
     @ElementCollection(fetch = FetchType.EAGER)
-    private List<Role> roles;
+    private List<Role> roles = List.of(Role.ROLE_USER);
 }

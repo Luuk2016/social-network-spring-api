@@ -63,4 +63,27 @@ public class UserService {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userRepository.save(user);
     }
+
+    public User update(long id, User newUserData) {
+        Optional<User> currentUserData = userRepository.findById(id);
+
+        if (currentUserData.isPresent()) {
+            newUserData.setId(currentUserData.get().getId());
+            newUserData.setPassword(passwordEncoder.encode(newUserData.getPassword()));
+
+            return userRepository.save(newUserData);
+        }
+
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found");
+    }
+
+    public void deleteUser(long id) {
+        Optional<User> user = userRepository.findById(id);
+
+        if (user.isPresent()) {
+            userRepository.delete(user.get());
+        } else {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found");
+        }
+    }
 }

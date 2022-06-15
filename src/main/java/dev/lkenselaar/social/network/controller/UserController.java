@@ -2,14 +2,15 @@ package dev.lkenselaar.social.network.controller;
 
 import dev.lkenselaar.social.network.model.DTO.*;
 import dev.lkenselaar.social.network.service.UserService;
-import dev.lkenselaar.social.network.model.Role;
 import dev.lkenselaar.social.network.model.User;
 import io.swagger.v3.oas.annotations.Operation;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.FieldError;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,6 +18,7 @@ import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * @author Luuk Kenselaar (https://lkenselaar.dev)
@@ -28,16 +30,19 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private ModelMapper modelMapper;
+
     @PostMapping("/users/authenticate")
     @Operation(summary = "Authenticate", description = "Receive a token to authenticate with the API", tags = {"Auth"})
     public ResponseEntity<?> authenticate(@Valid @RequestBody AuthenticateRequestDTO body) {
         try {
             String accessToken = userService.authenticate(body.getUsername(), body.getPassword());
 
-            AuthenticateResponseDTO authenticateResponse = new AuthenticateResponseDTO();
-            authenticateResponse.setAccessToken(accessToken);
+            AuthenticateResponseDTO response = new AuthenticateResponseDTO();
+            response.setAccessToken(accessToken);
 
-            return new ResponseEntity<>(authenticateResponse, HttpStatus.OK);
+            return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body(e.getMessage());
         }
@@ -47,17 +52,13 @@ public class UserController {
     @Operation(summary = "Create user", description = "Create a new user", tags = {"User"})
     public ResponseEntity<?> createUser(@Valid @RequestBody CreateUserRequestDTO body) {
         try {
-            User user = new User();
-            user.setName(body.getName());
-            user.setUsername(body.getUsername());
-            user.setPassword(body.getPassword());
-            user.setRoles(List.of(Role.ROLE_USER));
+            // Convert DTO to Entity
+            User user = modelMapper.map(body, User.class);
 
             User result = userService.add(user);
 
-            CreateUserResponseDTO response = new CreateUserResponseDTO();
-            response.setName(result.getName());
-            response.setUsername(result.getUsername());
+            // Convert Entity to DTO
+            CreateUserResponseDTO response = modelMapper.map(result, CreateUserResponseDTO.class);
 
             return new ResponseEntity<>(response, HttpStatus.CREATED);
         } catch (Exception e) {
@@ -72,7 +73,10 @@ public class UserController {
         try {
             List<User> users = userService.getUsers();
 
-            return new ResponseEntity<>(users, HttpStatus.OK);
+            // Convert Entities to list of DTOs
+            List<UserResponseDTO> response = users.stream().map(post -> modelMapper.map(post, UserResponseDTO.class)).collect(Collectors.toList());
+
+            return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
@@ -81,11 +85,45 @@ public class UserController {
     @GetMapping("/users/{id}")
     @PreAuthorize("hasAnyRole('ADMIN')")
     @Operation(summary = "Get user", description = "Get a specific user by id", tags = {"Admin"})
-    public ResponseEntity<?> getUsers(@PathVariable int id) {
+    public ResponseEntity<?> getUser(@PathVariable int id) {
         try {
             User user = userService.getUserById(id);
 
-            return new ResponseEntity<>(user, HttpStatus.OK);
+            // Convert Entity to DTO
+            UserResponseDTO response = modelMapper.map(user, UserResponseDTO.class);
+
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+    }
+
+    @PutMapping("/users/{id}")
+    @PreAuthorize("hasAnyRole('ADMIN')")
+    @Operation(summary = "Update user", description = "Update a specific user", tags = {"Admin"})
+    public ResponseEntity<?> updateUser(@PathVariable int id, @Validated @RequestBody UpdateUserRequestDTO body) {
+        try {
+            // Convert DTO to Entity
+            User userRequest = modelMapper.map(body, User.class);
+
+            User user = userService.update(id, userRequest);
+
+            // Convert Entity to DTO
+            UserResponseDTO response = modelMapper.map(user, UserResponseDTO.class);
+
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+    }
+
+    @DeleteMapping("/users/{id}")
+    @Operation(summary = "Delete user", description = "Delete a specific user", tags = {"Admin"})
+    public ResponseEntity<?> deleteUser(@PathVariable int id) {
+        try {
+            userService.deleteUser(id);
+
+            return ResponseEntity.status(HttpStatus.OK).build();
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
