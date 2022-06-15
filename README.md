@@ -28,6 +28,12 @@ mvn spring-boot:run
 
 ### Built with
 - [Spring](http://spring.io/) - Jakarta EE Framework
+- [Spring Data JPA](https://spring.io/projects/spring-data-jpa)
+- [Spring Security](https://spring.io/projects/spring-security)
+- [H2 Database)](https://www.h2database.com/html/main.html) - for development purposes
+- [Project Lombok](https://projectlombok.org/) - used to reduce boilerplate code
+- [Springdoc OpenAPI](https://github.com/springdoc/springdoc-openapi) - used for generating API docs
+- [JJWT](https://github.com/jwtk/jjwt) - used for creating and verifying JWTs
 
 ### License
 This application is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
