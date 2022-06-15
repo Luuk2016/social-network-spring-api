@@ -6,12 +6,28 @@
 |------|-------|
 |[![Java CI with Maven](https://github.com/Luuk2016/socialnetwork-spring-api/actions/workflows/maven.yml/badge.svg?branch=master&event=push)](https://github.com/Luuk2016/socialnetwork-spring-api/actions/workflows/maven.yml)|[![Java CI with Maven](https://github.com/Luuk2016/socialnetwork-spring-api/actions/workflows/maven.yml/badge.svg?branch=develop&event=push)](https://github.com/Luuk2016/socialnetwork-spring-api/actions/workflows/maven.yml)|
 
+### Description
+- API Base endpoint: localhost:8080/api
+- Swagger: localhost:8080/api/swagger-ui.html
+- H2 console: localhost:8080/api/h2-console
+
 ### Prerequisites
 * JDK 17
+* Maven
 
-### Links
-- [Swagger documentation](http://localhost:8080/api/swagger-ui.html)
-- [H2 console](http://localhost:8080/api/h2-console)
+### How to run (CLI)
+Make sure you have all prerequisities, no Maven wrapper is included.
+1. Clone/download the repository.
+
+2. Open a terminal and move your directory to the project.
+
+3. Run the app:
+```
+mvn spring-boot:run
+```
+
+### Built with
+- [Spring](http://spring.io/) - Jakarta EE Framework
 
 ### License
 This application is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
