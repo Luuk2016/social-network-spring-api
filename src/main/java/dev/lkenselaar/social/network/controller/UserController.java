@@ -35,7 +35,11 @@ public class UserController {
     private ModelMapper modelMapper;
 
     @PostMapping("/users")
-    @Operation(summary = "Create user", description = "Create a new user", tags = {"User"})
+    @Operation(
+        summary = "Create user",
+        description = "Create a new user",
+        tags = {"User controller"}
+    )
     public ResponseEntity<?> createUser(@Valid @RequestBody CreateUserRequestDTO body) {
         try {
             // Convert DTO to Entity
@@ -55,10 +59,10 @@ public class UserController {
     @GetMapping("/users")
     @PreAuthorize("hasAnyRole('ADMIN')")
     @Operation(
-        summary = "Get users",
+        summary = "Get users (admin only)",
         description = "Get all registered users",
         security = @SecurityRequirement(name = "bearerAuth"),
-        tags = {"Admin"}
+        tags = {"User controller"}
     )
     public ResponseEntity<?> getUsers() {
         try {
@@ -76,10 +80,10 @@ public class UserController {
     @GetMapping("/users/{id}")
     @PreAuthorize("hasAnyRole('ADMIN')")
     @Operation(
-        summary = "Get user",
+        summary = "Get user (admin only)",
         description = "Get a specific user by id",
         security = @SecurityRequirement(name = "bearerAuth"),
-        tags = {"Admin"}
+        tags = {"User controller"}
     )
     public ResponseEntity<?> getUser(@PathVariable int id) {
         try {
@@ -97,10 +101,10 @@ public class UserController {
     @DeleteMapping("/users/{id}")
     @PreAuthorize("hasAnyRole('ADMIN')")
     @Operation(
-        summary = "Delete user",
+        summary = "Delete user (admin only)",
         description = "Delete a specific user",
         security = @SecurityRequirement(name = "bearerAuth"),
-        tags = {"Admin"}
+        tags = {"User controller"}
     )
     public ResponseEntity<?> deleteUser(@PathVariable int id) {
         try {
