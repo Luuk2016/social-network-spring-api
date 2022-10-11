@@ -95,6 +95,7 @@ public class UserController {
     }
 
     @DeleteMapping("/users/{id}")
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @Operation(
         summary = "Delete user",
         description = "Delete a specific user",
