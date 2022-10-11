@@ -47,8 +47,8 @@ public class JwtTokenProvider {
     }
 
     public String createToken(Long id, String username, List<Role> roles) {
-        Claims claims = Jwts.claims().setSubject(id.toString());
-        claims.put("username", username);
+        Claims claims = Jwts.claims().setSubject(username);
+        claims.put("userId", id);
         claims.put("auth", roles.stream().map(s -> new SimpleGrantedAuthority(s.getAuthority())).collect(Collectors.toList()));
 
         Date now = new Date();
