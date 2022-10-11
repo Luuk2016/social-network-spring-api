@@ -39,7 +39,7 @@ public class UserService {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
 
             User user = userRepository.findByUsername(username);
-            return jwtTokenProvider.createToken(username, user.getRoles());
+            return jwtTokenProvider.createToken(user.getId(), username, user.getRoles());
         } catch (AuthenticationException exception) {
             throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Username/password invalid");
         }
@@ -62,19 +62,6 @@ public class UserService {
     public User add(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userRepository.save(user);
-    }
-
-    public User update(long id, User newUserData) {
-        Optional<User> currentUserData = userRepository.findById(id);
-
-        if (currentUserData.isPresent()) {
-            newUserData.setId(currentUserData.get().getId());
-            newUserData.setPassword(passwordEncoder.encode(newUserData.getPassword()));
-
-            return userRepository.save(newUserData);
-        }
-
-        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found");
     }
 
     public void deleteUser(long id) {

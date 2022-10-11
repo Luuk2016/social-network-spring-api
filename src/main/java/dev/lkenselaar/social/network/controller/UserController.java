@@ -94,30 +94,6 @@ public class UserController {
         }
     }
 
-    @PutMapping("/users/{id}")
-    @PreAuthorize("hasAnyRole('ADMIN')")
-    @Operation(
-        summary = "Update user",
-        description = "Update a specific user",
-        security = @SecurityRequirement(name = "bearerAuth"),
-        tags = {"Admin"}
-    )
-    public ResponseEntity<?> updateUser(@PathVariable int id, @Validated @RequestBody UpdateUserRequestDTO body) {
-        try {
-            // Convert DTO to Entity
-            User userRequest = modelMapper.map(body, User.class);
-
-            User user = userService.update(id, userRequest);
-
-            // Convert Entity to DTO
-            UserResponseDTO response = modelMapper.map(user, UserResponseDTO.class);
-
-            return new ResponseEntity<>(response, HttpStatus.OK);
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
-        }
-    }
-
     @DeleteMapping("/users/{id}")
     @Operation(
         summary = "Delete user",
