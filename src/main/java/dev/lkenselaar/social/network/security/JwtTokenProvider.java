@@ -46,8 +46,9 @@ public class JwtTokenProvider {
         secretKey = Base64.getEncoder().encodeToString(secretKey.getBytes());
     }
 
-    public String createToken(String username, List<Role> roles) {
-        Claims claims = Jwts.claims().setSubject(username);
+    public String createToken(Long id, String username, List<Role> roles) {
+        Claims claims = Jwts.claims().setSubject(id.toString());
+        claims.put("username", username);
         claims.put("auth", roles.stream().map(s -> new SimpleGrantedAuthority(s.getAuthority())).collect(Collectors.toList()));
 
         Date now = new Date();
