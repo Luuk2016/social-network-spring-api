@@ -88,7 +88,7 @@ public class UserControllerTest {
     @Test
     @WithMockUser(username = "jane", roles = "ADMIN")
     public void deleteUserAsAdminShouldGiveOk() throws Exception {
-        this.mockMvc.perform(delete("/users/1").contentType(MediaType.APPLICATION_JSON))
+        this.mockMvc.perform(delete("/users/3").contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk());
     }
