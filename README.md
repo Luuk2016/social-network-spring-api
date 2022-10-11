@@ -16,10 +16,10 @@
 * Maven
 
 ### How to run (CLI)
-Make sure you have all prerequisities, no Maven wrapper is included.
+Make sure you have all prerequisites, no Maven wrapper is included.
 1. Clone/download the repository.
 
-2. Open a terminal and move your directory to the project.
+2. Open the project folder in a terminal.
 
 3. Run the app:
 ```
@@ -28,12 +28,14 @@ mvn spring-boot:run
 
 ### Built with
 - [Spring](http://spring.io/) - Jakarta EE Framework
-- [Spring Data JPA](https://spring.io/projects/spring-data-jpa)
-- [Spring Security](https://spring.io/projects/spring-security)
-- [H2 Database)](https://www.h2database.com/html/main.html) - for development purposes
+- [Spring Data JPA](https://spring.io/projects/spring-data-jpa) - Spring JPA framework
+- [Spring Security](https://spring.io/projects/spring-security) - Spring security framework
+- [H2 Database](https://www.h2database.com/html/main.html) - for development purposes
 - [Project Lombok](https://projectlombok.org/) - used to reduce boilerplate code
 - [Springdoc OpenAPI](https://github.com/springdoc/springdoc-openapi) - used for generating API docs
 - [JJWT](https://github.com/jwtk/jjwt) - used for creating and verifying JWTs
+- [ModelMapper](https://github.com/modelmapper/modelmapper) - model mapping library
+
 
 ### License
 This application is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
