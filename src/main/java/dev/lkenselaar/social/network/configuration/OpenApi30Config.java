@@ -25,8 +25,10 @@ import org.springframework.context.annotation.Configuration;
         ),
         license = @License(
             name = "MIT Licence",
-            url = "https://github.com/Luuk2016/social-network-spring-api/blob/master/LICENSE")),
-        servers = @Server(url = "http://localhost:8080")
+            url = "https://github.com/Luuk2016/social-network-spring-api/blob/master/LICENSE"
+        )
+    ),
+    servers = @Server(url = "http://localhost:8080")
 )
 
 @SecurityScheme(

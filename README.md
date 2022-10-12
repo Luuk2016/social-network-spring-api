@@ -25,6 +25,15 @@ Make sure you have all prerequisities, no Maven wrapper is included.
 ```
 mvn spring-boot:run
 ```
+### Demo accounts
+* <b>John Doe (user)</b>
+<br>Username: john
+<br>Password: password
+<br><br>
+
+* <b>Jane Roe (admin)</b>
+<br>Username: jane
+<br>Password: password
 
 ### Built with
 - [Spring](http://spring.io/) - Jakarta EE Framework
