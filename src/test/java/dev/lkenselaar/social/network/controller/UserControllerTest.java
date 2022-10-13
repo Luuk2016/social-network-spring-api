@@ -1,7 +1,7 @@
 package dev.lkenselaar.social.network.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import dev.lkenselaar.social.network.model.DTO.CreateUserRequestDTO;
+import dev.lkenselaar.social.network.model.DTO.User.CreateUserRequestDTO;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -83,14 +83,6 @@ public class UserControllerTest {
                 .andExpect(status().isBadRequest())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.password", is("Password can't be blank")));
-    }
-
-    @Test
-    @WithMockUser(username = "jane", roles = "ADMIN")
-    public void deleteUserAsAdminShouldGiveOk() throws Exception {
-        this.mockMvc.perform(delete("/users/3").contentType(MediaType.APPLICATION_JSON))
-                .andDo(print())
-                .andExpect(status().isOk());
     }
 
     public static String asJsonString(final Object obj) {
