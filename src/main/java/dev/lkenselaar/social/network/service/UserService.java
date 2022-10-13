@@ -64,13 +64,10 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public void deleteUser(long id) {
-        Optional<User> user = userRepository.findById(id);
-
-        if (user.isPresent()) {
-            userRepository.delete(user.get());
-        } else {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found");
+    public User findByUsername(String name) {
+        if (userRepository.findByUsername(name) == null) {
+            throw new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY, "Username not found");
         }
+        return userRepository.findByUsername(name);
     }
 }

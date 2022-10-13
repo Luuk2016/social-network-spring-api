@@ -1,22 +1,20 @@
-package dev.lkenselaar.social.network.model.DTO;
+package dev.lkenselaar.social.network.model.DTO.User;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
-import org.springframework.validation.annotation.Validated;
 
 /**
  * @author Luuk Kenselaar (https://lkenselaar.dev)
- * @since 14-6-2022
+ * @since 15/06/2022
  */
-@Validated
 @Data
-public class CreateUserResponseDTO {
+public class UserPostDTO {
+    @JsonProperty("id")
+    @Schema(example = "1", required = true)
+    private Long id;
+
     @JsonProperty("name")
     @Schema(example = "John Doe", required = true)
     private String name;
-
-    @JsonProperty("username")
-    @Schema(example = "john", required = true)
-    private String username;
 }

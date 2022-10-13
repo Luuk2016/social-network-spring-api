@@ -1,6 +1,8 @@
 package dev.lkenselaar.social.network.controller;
 
-import dev.lkenselaar.social.network.model.DTO.*;
+import dev.lkenselaar.social.network.model.DTO.User.CreateUserRequestDTO;
+import dev.lkenselaar.social.network.model.DTO.User.CreateUserResponseDTO;
+import dev.lkenselaar.social.network.model.DTO.User.UserDTO;
 import dev.lkenselaar.social.network.service.UserService;
 import dev.lkenselaar.social.network.model.User;
 import io.swagger.v3.oas.annotations.Operation;
@@ -11,7 +13,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.FieldError;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
@@ -45,6 +46,7 @@ public class UserController {
             // Convert DTO to Entity
             User user = modelMapper.map(body, User.class);
 
+            // Add the user
             User result = userService.add(user);
 
             // Convert Entity to DTO
@@ -66,10 +68,11 @@ public class UserController {
     )
     public ResponseEntity<?> getUsers() {
         try {
+            // Get the users
             List<User> users = userService.getUsers();
 
             // Convert Entities to list of DTOs
-            List<UserResponseDTO> response = users.stream().map(post -> modelMapper.map(post, UserResponseDTO.class)).collect(Collectors.toList());
+            List<UserDTO> response = users.stream().map(post -> modelMapper.map(post, UserDTO.class)).collect(Collectors.toList());
 
             return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (Exception e) {
@@ -87,30 +90,13 @@ public class UserController {
     )
     public ResponseEntity<?> getUser(@PathVariable int id) {
         try {
+            // Get the user
             User user = userService.getUserById(id);
 
             // Convert Entity to DTO
-            UserResponseDTO response = modelMapper.map(user, UserResponseDTO.class);
+            UserDTO response = modelMapper.map(user, UserDTO.class);
 
             return new ResponseEntity<>(response, HttpStatus.OK);
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
-        }
-    }
-
-    @DeleteMapping("/users/{id}")
-    @PreAuthorize("hasAnyRole('ADMIN')")
-    @Operation(
-        summary = "Delete user (admin only)",
-        description = "Delete a specific user",
-        security = @SecurityRequirement(name = "bearerAuth"),
-        tags = {"User controller"}
-    )
-    public ResponseEntity<?> deleteUser(@PathVariable int id) {
-        try {
-            userService.deleteUser(id);
-
-            return ResponseEntity.status(HttpStatus.OK).build();
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }

@@ -1,7 +1,6 @@
-package dev.lkenselaar.social.network.model.DTO;
+package dev.lkenselaar.social.network.model.DTO.Authentication;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 import org.springframework.validation.annotation.Validated;
 
@@ -13,6 +12,8 @@ import org.springframework.validation.annotation.Validated;
 @Data
 public class AuthenticateResponseDTO {
     @JsonProperty("accessToken")
-    @Schema(example = "d290f1ee-6c54-4b01-90e6-d701748f0851", required = true)
     private String accessToken;
+
+    @JsonProperty("tokenType")
+    private String tokenType = "Bearer";
 }

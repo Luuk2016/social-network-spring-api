@@ -1,4 +1,4 @@
-package dev.lkenselaar.social.network.model.DTO;
+package dev.lkenselaar.social.network.model.DTO.User;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.lkenselaar.social.network.model.Role;
@@ -12,7 +12,7 @@ import java.util.List;
  * @since 15/06/2022
  */
 @Data
-public class UserResponseDTO {
+public class UserDTO {
 
     @JsonProperty("id")
     @Schema(example = "1", required = true)
