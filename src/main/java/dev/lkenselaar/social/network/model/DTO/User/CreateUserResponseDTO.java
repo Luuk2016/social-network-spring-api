@@ -11,6 +11,9 @@ import org.springframework.validation.annotation.Validated;
 @Validated
 @Data
 public class CreateUserResponseDTO {
+    @JsonProperty("id")
+    private Long id;
+
     @JsonProperty("name")
     private String name;
 
